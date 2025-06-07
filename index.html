@@ -3,198 +3,897 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Normal Page</title>
+    <title>Wilson & Associates - Corporate Excellence Division</title>
     <style>
-        /* Animation and design elements */
-        body {
-            background: linear-gradient(45deg, red, yellow, lime, cyan, blue, magenta);
-            background-size: 400% 400%;
-            animation: gradient-shift 10s ease infinite;
-            color: black;
-            font-family: "Comic Sans MS", cursive;
-            text-align: center;
-            padding: 50px;
-            overflow-x: hidden;
-            min-height: 100vh;
+        * {
             margin: 0;
-            user-select: none; /* Prevent text selection */
+            padding: 0;
+            box-sizing: border-box;
         }
         
-        @keyframes gradient-shift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
         }
         
-        h2 {
-            text-shadow: 3px 3px 0 #ff00ff, -3px -3px 0 #00ffff;
-            font-size: 2.5rem;
-            transform: skew(-5deg);
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
         
-        .button-container {
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 1.5rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            backdrop-filter: blur(10px);
+        }
+        
+        nav {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
+            align-items: center;
             flex-wrap: wrap;
-            gap: 15px;
-            margin: 20px 0;
         }
         
-        button, input {
-            margin: 10px;
-            padding: 15px 25px;
-            font-size: 18px;
-            cursor: pointer;
-            background-color: lime;
-            border: 3px solid black;
-            border-radius: 8px;
-            font-family: "Comic Sans MS", cursive;
-            box-shadow: 5px 5px 0 rgba(0,0,0,0.5);
-            transition: transform 0.1s, box-shadow 0.1s;
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: linear-gradient(45deg, #fff, #e3f2fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .nav-links a {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            font-weight: 500;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(90deg, #64b5f6, #42a5f5);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-links a:hover {
+            color: white;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+        
+        main {
+            margin-top: 100px;
+            min-height: calc(100vh - 100px);
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 6rem 0;
             position: relative;
             overflow: hidden;
         }
         
-        button:hover, input:focus {
-            transform: translateY(-3px);
-            box-shadow: 8px 8px 0 rgba(0,0,0,0.5);
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.05)" points="0,0 1000,300 1000,1000 0,700"/></svg>');
+            background-size: cover;
         }
         
-        button:active {
-            transform: translateY(2px);
-            box-shadow: 3px 3px 0 rgba(0,0,0,0.5);
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            letter-spacing: -1px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+        
+        .section {
+            padding: 4rem 0;
+            margin: 3rem 0;
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .section h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #1e3c72;
+            font-size: 2.5rem;
+            font-weight: 600;
+            position: relative;
+        }
+        
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        /* Phase 1: Company History Quiz */
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .question {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid #3498db;
+            transition: all 0.3s ease;
+        }
+        
+        .question:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .question h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .options {
+            display: grid;
+            gap: 0.5rem;
+        }
+        
+        .option {
+            padding: 0.8rem 1.2rem;
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+        
+        .option:hover {
+            border-color: #3498db;
+            background: #f0f8ff;
+        }
+        
+        .option.selected {
+            background: #3498db;
+            color: white;
+            border-color: #2980b9;
+        }
+
+        /* Phase 2: Employee Directory */
+        .employee-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .employee-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .employee-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .employee-card:hover::before {
+            left: 100%;
+        }
+        
+        .employee-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .employee-card.clicked {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            transform: scale(0.95);
+        }
+        
+        .employee-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        /* Phase 3: Security Access */
+        .security-panel {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #2c3e50;
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .security-input {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 8px;
+            background: #34495e;
+            color: white;
+            margin: 1rem 0;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .security-input::placeholder {
+            color: rgba(255,255,255,0.6);
+        }
+        
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .key-button {
+            aspect-ratio: 1;
+            border: none;
+            border-radius: 8px;
+            background: #3498db;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .key-button:hover {
+            background: #2980b9;
+            transform: scale(1.05);
+        }
+        
+        .key-button:active {
+            transform: scale(0.95);
+        }
+
+        /* Phase 4: Document Analysis */
+        .document-viewer {
+            background: #ecf0f1;
+            border-radius: 15px;
+            padding: 2rem;
+            max-height: 400px;
+            overflow-y: auto;
+            font-family: 'Times New Roman', serif;
+            line-height: 1.8;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .document-highlight {
+            background: yellow;
+            padding: 2px 4px;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .document-highlight:hover {
+            background: #ffd700;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .document-highlight.selected {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        /* Phase 5: Financial Calculator */
+        .calculator {
+            background: #2c3e50;
+            border-radius: 15px;
+            padding: 2rem;
+            max-width: 400px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .calc-display {
+            width: 100%;
+            height: 80px;
+            font-size: 2rem;
+            text-align: right;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            background: #34495e;
+            color: white;
+            margin-bottom: 1rem;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .calc-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+        
+        .calc-button {
+            aspect-ratio: 1;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .calc-button.number {
+            background: #3498db;
+            color: white;
+        }
+        
+        .calc-button.operator {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .calc-button.special {
+            background: #f39c12;
+            color: white;
+        }
+        
+        .calc-button:hover {
+            transform: scale(1.05);
+            filter: brightness(110%);
+        }
+
+        /* Success and Progress */
+        .progress-container {
+            position: fixed;
+            top: 120px;
+            right: 20px;
+            background: rgba(255,255,255,0.95);
+            padding: 1rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            z-index: 999;
+            backdrop-filter: blur(10px);
+        }
+        
+        .progress-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: conic-gradient(#3498db 0deg, #ecf0f1 0deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2c3e50;
+            font-weight: bold;
+            font-size: 1.1rem;
+            position: relative;
+        }
+        
+        .progress-circle::before {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            z-index: -1;
         }
         
         .hidden {
             display: none;
         }
         
-        .hint {
-            font-size: 16px;
+        .phase-complete {
+            animation: phase-glow 2s ease-in-out;
+        }
+        
+        @keyframes phase-glow {
+            0% { box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
+            50% { box-shadow: 0 10px 40px rgba(52, 152, 219, 0.4); }
+            100% { box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
+        }
+        
+        .ultimate-success {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            text-shadow: 2px 2px red, -2px -2px blue;
-            font-weight: bold;
-            animation: pulse 1.5s infinite;
+            padding: 4rem;
+            border-radius: 20px;
+            text-align: center;
+            margin: 3rem 0;
+            position: relative;
+            overflow: hidden;
         }
         
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        #puzzleImage {
-            margin: 20px auto;
-            border: 5px dashed purple;
-            border-radius: 15px;
-            transition: transform 0.3s;
-            width: 200px; 
-            height: 200px;
-            background-color: #5a189a;
-            cursor: pointer;
-        }
-        
-        #puzzleImage:hover {
-            transform: rotate(3deg) scale(1.05);
-        }
-        
-        .draggable-element {
-            width: 50px;
-            height: 50px;
+        .ultimate-success::before {
+            content: '';
             position: absolute;
-            border-radius: 50%;
-            cursor: move;
-            z-index: 100;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            animation: success-shimmer 3s ease-in-out infinite;
         }
         
-        #secret {
-            font-size: 24px;
-            background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            padding: 20px;
-            border: 3px dotted gold;
-            border-radius: 15px;
-            animation: rainbow 2s linear infinite;
-            max-width: 400px;
-            margin: 20px auto;
+        @keyframes success-shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
         
-        @keyframes rainbow {
-            0% { filter: hue-rotate(0deg); }
-            100% { filter: hue-rotate(360deg); }
-        }
-        
-        .progress-container {
-            width: 80%;
-            max-width: 300px;
-            height: 20px;
-            background-color: #ddd;
+        .code-display {
+            font-family: 'Courier New', monospace;
+            font-size: 1.8rem;
+            background: rgba(0,0,0,0.3);
+            padding: 1.5rem;
             border-radius: 10px;
-            margin: 20px auto;
-            overflow: hidden;
-            position: relative;
+            margin: 2rem 0;
+            letter-spacing: 2px;
+            word-break: break-all;
+        }
+
+        footer {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 4rem;
         }
         
-        .progress-bar {
-            height: 100%;
-            width: 0%;
-            background-color: #ff00ff;
-            transition: width 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .message-box {
-            background-color: rgba(255, 255, 255, 0.7);
-            border: 3px solid black;
-            border-radius: 10px;
-            padding: 15px;
-            margin: 20px auto;
-            max-width: 80%;
-            font-weight: bold;
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .employee-grid { grid-template-columns: 1fr; }
+            .progress-container { right: 10px; top: 110px; }
+            .security-grid { grid-template-columns: repeat(3, 1fr); }
         }
     </style>
 </head>
-<body oncontextmenu="return false;">
-    <h2>Just a normal page.</h2>
-    <p>Nothing to see here.</p>
-    
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">Wilson & Associates</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#history">History</a></li>
+                <li><a href="#team">Team</a></li>
+                <li><a href="#security">Security</a></li>
+                <li><a href="#documents">Documents</a></li>
+                <li><a href="#financial">Financial</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <div class="progress-container">
-        <div class="progress-bar" id="progressBar"></div>
-    </div>
-    
-    <div id="message" class="message-box">
-        Hmm... what are these buttons for?
-    </div>
-    
-    <!-- Phase 1: Button Sequence -->
-    <div id="phase1" class="puzzle-phase">
-        <div class="button-container">
-            <button id="btn1">Button 1</button>
-            <button id="btn2">Button 2</button>
-            <button id="btn3">Button 3</button>
-            <button id="btn4">Button 4</button>
+        <div class="progress-circle" id="progressCircle">0%</div>
+        <div style="text-align: center; margin-top: 0.5rem; font-size: 0.8rem; color: #666;">
+            Progress
         </div>
-        <p class="hint">Try clicking the buttons in a specific order...</p>
     </div>
-    
-    <!-- Phase 2: Color Arrangement -->
-    <div id="phase2" class="puzzle-phase hidden">
-        <div id="colorContainer" style="height: 300px; position: relative;"></div>
-        <p class="hint">Drag the colours to certain place...</p>
-    </div>
-    
-    <!-- Phase 4: Final Input -->
-    <div id="phase3" class="puzzle-phase hidden">
-        <input type="text" id="finalInput" placeholder="Enter the answer...">
-        <p class="hint">Enter something related to time...</p>
-    </div>
-    
-    <!-- Secret Reveal -->
-    <p class="hidden" id="secret">🎉 You found it! Code: B1GBR41NHUM4N5</p>
-    
+
+    <main>
+        <section class="hero">
+            <div class="hero-content container">
+                <h1>Corporate Excellence Division</h1>
+                <p>Serving Fortune 500 companies since 1987 with unparalleled expertise</p>
+                <p style="font-size: 1rem; opacity: 0.8; margin-top: 1rem;">
+                    Est. 1987 • Global Headquarters: New York • 12,000+ Employees Worldwide
+                </p>
+            </div>
+        </section>
+
+        <!-- Phase 1: Company History Quiz -->
+        <section class="section" id="phase1">
+            <div class="container">
+                <h2>Company History Assessment</h2>
+                <p style="text-align: center; margin-bottom: 3rem; color: #666; font-size: 1.1rem;">
+                    Please complete this brief assessment about our company history to proceed
+                </p>
+                <div class="quiz-container">
+                    <div class="question">
+                        <h3>1. Wilson & Associates was founded in which year?</h3>
+                        <div class="options">
+                            <div class="option" data-answer="1985">1985</div>
+                            <div class="option" data-answer="1987">1987</div>
+                            <div class="option" data-answer="1989">1989</div>
+                            <div class="option" data-answer="1991">1991</div>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <h3>2. Our first major client was from which industry?</h3>
+                        <div class="options">
+                            <div class="option" data-answer="automotive">Automotive</div>
+                            <div class="option" data-answer="technology">Technology</div>
+                            <div class="option" data-answer="aerospace">Aerospace</div>
+                            <div class="option" data-answer="pharmaceutical">Pharmaceutical</div>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <h3>3. The company motto "Excellence Through Innovation" was adopted in:</h3>
+                        <div class="options">
+                            <div class="option" data-answer="1992">1992</div>
+                            <div class="option" data-answer="1994">1994</div>
+                            <div class="option" data-answer="1996">1996</div>
+                            <div class="option" data-answer="1998">1998</div>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <h3>4. Our international expansion began with an office in:</h3>
+                        <div class="options">
+                            <div class="option" data-answer="london">London</div>
+                            <div class="option" data-answer="tokyo">Tokyo</div>
+                            <div class="option" data-answer="frankfurt">Frankfurt</div>
+                            <div class="option" data-answer="singapore">Singapore</div>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <h3>5. The Wilson Innovation Award was first presented in:</h3>
+                        <div class="options">
+                            <div class="option" data-answer="2001">2001</div>
+                            <div class="option" data-answer="2003">2003</div>
+                            <div class="option" data-answer="2005">2005</div>
+                            <div class="option" data-answer="2007">2007</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase 2: Employee Directory -->
+        <section class="section hidden" id="phase2">
+            <div class="container">
+                <h2>Employee Directory Access</h2>
+                <p style="text-align: center; margin-bottom: 3rem; color: #666; font-size: 1.1rem;">
+                    Please select our department heads in order of seniority (longest tenure first)
+                </p>
+                <div class="employee-grid">
+                    <div class="employee-card" data-employee="sarah" data-tenure="2003">
+                        <div class="employee-avatar">SJ</div>
+                        <h3>Sarah Johnson</h3>
+                        <p>Chief Technology Officer</p>
+                        <p style="opacity: 0.8; font-size: 0.9rem; margin-top: 0.5rem;">Joined: 2003</p>
+                    </div>
+                    <div class="employee-card" data-employee="michael" data-tenure="1999">
+                        <div class="employee-avatar">MR</div>
+                        <h3>Michael Rodriguez</h3>
+                        <p>Chief Financial Officer</p>
+                        <p style="opacity: 0.8; font-size: 0.9rem; margin-top: 0.5rem;">Joined: 1999</p>
+                    </div>
+                    <div class="employee-card" data-employee="emily" data-tenure="2008">
+                        <div class="employee-avatar">EC</div>
+                        <h3>Emily Chen</h3>
+                        <p>Chief Marketing Officer</p>
+                        <p style="opacity: 0.8; font-size: 0.9rem; margin-top: 0.5rem;">Joined: 2008</p>
+                    </div>
+                    <div class="employee-card" data-employee="david" data-tenure="1995">
+                        <div class="employee-avatar">DW</div>
+                        <h3>David Wilson</h3>
+                        <p>Chief Executive Officer</p>
+                        <p style="opacity: 0.8; font-size: 0.9rem; margin-top: 0.5rem;">Joined: 1995</p>
+                    </div>
+                    <div class="employee-card" data-employee="lisa" data-tenure="2011">
+                        <div class="employee-avatar">LT</div>
+                        <h3>Lisa Thompson</h3>
+                        <p>Chief Human Resources Officer</p>
+                        <p style="opacity: 0.8; font-size: 0.9rem; margin-top: 0.5rem;">Joined: 2011</p>
+                    </div>
+                    <div class="employee-card" data-employee="robert" data-tenure="2001">
+                        <div class="employee-avatar">RK</div>
+                        <h3>Robert Kim</h3>
+                        <p>Chief Operations Officer</p>
+                        <p style="opacity: 0.8; font-size: 0.9rem; margin-top: 0.5rem;">Joined: 2001</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase 3: Security Access -->
+        <section class="section hidden" id="phase3">
+            <div class="container">
+                <h2>Security Verification</h2>
+                <p style="text-align: center; margin-bottom: 3rem; color: #666; font-size: 1.1rem;">
+                    Enter the security access code to continue
+                </p>
+                <div class="security-panel">
+                    <h3 style="text-align: center; margin-bottom: 2rem;">SECURE ACCESS TERMINAL</h3>
+                    <input type="text" class="security-input" id="securityCode" placeholder="Enter Access Code" maxlength="8">
+                    <div class="security-grid">
+                        <button class="key-button" data-key="1">1</button>
+                        <button class="key-button" data-key="2">2</button>
+                        <button class="key-button" data-key="3">3</button>
+                        <button class="key-button" data-key="A">A</button>
+                        <button class="key-button" data-key="4">4</button>
+                        <button class="key-button" data-key="5">5</button>
+                        <button class="key-button" data-key="6">6</button>
+                        <button class="key-button" data-key="B">B</button>
+                        <button class="key-button" data-key="7">7</button>
+                        <button class="key-button" data-key="8">8</button>
+                        <button class="key-button" data-key="9">9</button>
+                        <button class="key-button" data-key="C">C</button>
+                        <button class="key-button" data-key="*">*</button>
+                        <button class="key-button" data-key="0">0</button>
+                        <button class="key-button" data-key="#">#</button>
+                        <button class="key-button" data-key="D">D</button>
+                    </div>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <button class="key-button special" id="clearBtn" style="flex: 1;">CLEAR</button>
+                        <button class="key-button special" id="enterBtn" style="flex: 1;">ENTER</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase 4: Document Analysis -->
+        <section class="section hidden" id="phase4">
+            <div class="container">
+                <h2>Document Analysis</h2>
+                <p style="text-align: center; margin-bottom: 3rem; color: #666; font-size: 1.1rem;">
+                    Review the document below and identify all the financial figures (click to highlight)
+                </p>
+                <div class="document-viewer">
+                    <h3 style="text-align: center; margin-bottom: 2rem;">QUARTERLY FINANCIAL REPORT - Q3 2024</h3>
+                    <p>Wilson & Associates is pleased to report strong financial performance for the third quarter of 2024. Our total revenue reached <span class="document-highlight" data-value="127.5">$127.5 million</span>, representing a significant increase from the previous quarter.</p>
+                    
+                    <p>Operating expenses for the quarter totaled <span class="document-highlight" data-value="89.2">$89.2 million</span>, which includes a one-time infrastructure investment of <span class="document-highlight" data-value="15.7">$15.7 million</span>. Our gross profit margin improved to <span class="document-highlight" data-value="38.3">38.3%</span>, exceeding our projected target of 35%.</p>
+                    
+                    <p>The Technology division contributed <span class="document-highlight" data-value="45.8">$45.8 million</span> in revenue, while our Consulting services generated <span class="document-highlight" data-value="52.1">$52.1 million</span>. The remaining <span class="document-highlight" data-value="29.6">$29.6 million</span> came from our Strategic Advisory services.</p>
+                    
+                    <p>Employee headcount increased by <span class="document-highlight" data-value="247">247</span> professionals this quarter, bringing our total workforce to <span class="document-highlight" data-value="12459">12,459</span> employees globally. Research and development investments totaled <span class="document-highlight" data-value="18.3">$18.3 million</span>, representing <span class="document-highlight" data-value="14.4">14.4%</span> of our total revenue.</p>
+                    
+                    <p>Looking ahead to Q4, we project revenue growth of approximately <span class="document-highlight" data-value="12.8">12.8%</span>, with total anticipated revenue of <span class="document-highlight" data-value="143.8">$143.8 million</span>. Our cash reserves stand at <span class="document-highlight" data-value="892.1">$892.1 million</span>, providing strong financial stability for future expansion initiatives.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase 5: Financial Calculator -->
+        <section class="section hidden" id="phase5">
+            <div class="container">
+                <h2>Financial Calculation Verification</h2>
+                <p style="text-align: center; margin-bottom: 3rem; color: #666; font-size: 1.1rem;">
+                    Calculate the sum of all revenue figures from the previous document
+                </p>
+                <div class="calculator">
+                    <input type="text" class="calc-display" id="calcDisplay" readonly placeholder="0">
+                    <div class="calc-grid">
+                        <button class="calc-button special" data-calc="C">C</button>
+                        <button class="calc-button special" data-calc="±">±</button>
+                        <button class="calc-button special" data-calc="%">%</button>
+                        <button class="calc-button operator" data-calc="÷">÷</button>
+                        <button class="calc-button number" data-calc="7">7</button>
+                        <button class="calc-button number" data-calc="8">8</button>
+                        <button class="calc-button number" data-calc="9">9</button>
+                        <button class="calc-button operator" data-calc="×">×</button>
+                        <button class="calc-button number" data-calc="4">4</button>
+                        <button class="calc-button number" data-calc="5">5</button>
+                        <button class="calc-button number" data-calc="6">6</button>
+                        <button class="calc-button operator" data-calc="−">−</button>
+                        <button class="calc-button number" data-calc="1">1</button>
+                        <button class="calc-button number" data-calc="2">2</button>
+                        <button class="calc-button number" data-calc="3">3</button>
+                        <button class="calc-button operator" data-calc="+">+</button>
+                        <button class="calc-button number" data-calc="0" style="grid-column: span 2;">0</button>
+                        <button class="calc-button number" data-calc=".">.</button>
+                        <button class="calc-button operator" data-calc="=">=</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase 6: Network Topology -->
+        <section class="section hidden" id="phase6">
+            <div class="container">
+                <h2>Network Topology Analysis</h2>
+                <p style="text-align: center; margin-bottom: 3rem; color: #666; font-size: 1.1rem;">
+                    Trace the optimal network path by clicking nodes in the correct sequence
+                </p>
+                <div style="position: relative; height: 400px; background: #2c3e50; border-radius: 15px; margin: 2rem 0;">
+                    <svg width="100%" height="100%" style="position: absolute; top: 0; left: 0;">
+                        <!-- Network connections -->
+                        <line x1="10%" y1="20%" x2="30%" y2="40%" stroke="#3498db" stroke-width="2" opacity="0.5"/>
+                        <line x1="30%" y1="40%" x2="50%" y2="20%" stroke="#3498db" stroke-width="2" opacity="0.5"/>
+                        <line x1="50%" y1="20%" x2="70%" y2="40%" stroke="#3498db" stroke-width="2" opacity="0.5"/>
+                        <line x1="70%" y1="40%" x2="90%" y2="20%" stroke="#3498db" stroke-width="2" opacity="0.5"/>
+                        <line x1="10%" y1="20%" x2="20%" y2="70%" stroke="#3498db" stroke-width="2" opacity="0.5"/>
+                        <line x1="20%" y1="70%" x2="50%" y2="80%" stroke="#3498db" stroke-width="2" opacity="0.5"/>
+                        <line x1="50%" y1="80%" x2="80%" y2="70%" stroke="#3498db" stroke-width="2" opacity="0.5"/>
+                        <line x1="80%" y1="70%" x2="90%" y2="20%" stroke="#3498db" stroke-width="2" opacity="0.5"/>
+                        <line x1="30%" y1="40%" x2="20%" y2="70%" stroke="#3498db" stroke-width="2" opacity="0.5"/>
+                        <line x1="50%" y1="20%" x2="50%" y2="80%" stroke="#3498db" stroke-width="2" opacity="0.5"/>
+                        <line x1="70%" y1="40%" x2="80%" y2="70%" stroke="#3498db" stroke-width="2" opacity="0.5"/>
+                    </svg>
+                    <div class="network-node" data-node="A" style="position: absolute; top: 15%; left: 8%;">A</div>
+                    <div class="network-node" data-node="B" style="position: absolute; top: 35%; left: 28%;">B</div>
+                    <div class="network-node" data-node="C" style="position: absolute; top: 15%; left: 48%;">C</div>
+                    <div class="network-node" data-node="D" style="position: absolute; top: 35%; left: 68%;">D</div>
+                    <div class="network-node" data-node="E" style="position: absolute; top: 15%; left: 88%;">E</div>
+                    <div class="network-node" data-node="F" style="position: absolute; top: 65%; left: 18%;">F</div>
+                    <div class="network-node" data-node="G" style="position: absolute; top: 75%; left: 48%;">G</div>
+                    <div class="network-node" data-node="H" style="position: absolute; top: 65%; left: 78%;">H</div>
+                </div>
+                <p style="text-align: center; color: #666; font-size: 0.9rem; margin-top: 1rem;">
+                    Hint: Find the path that spells out our company's core value
+                </p>
+            </div>
+        </section>
+
+        <!-- Phase 7: Color Sequence Memory -->
+        <section class="section hidden" id="phase7">
+            <div class="container">
+                <h2>Security Pattern Recognition</h2>
+                <p style="text-align: center; margin-bottom: 3rem; color: #666; font-size: 1.1rem;">
+                    Memorize and repeat the color sequence (watch carefully!)
+                </p>
+                <div class="color-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; max-width: 300px; margin: 0 auto;">
+                    <div class="color-button" data-color="red" style="aspect-ratio: 1; background: #e74c3c; border-radius: 15px; cursor: pointer; transition: all 0.3s ease;"></div>
+                    <div class="color-button" data-color="blue" style="aspect-ratio: 1; background: #3498db; border-radius: 15px; cursor: pointer; transition: all 0.3s ease;"></div>
+                    <div class="color-button" data-color="green" style="aspect-ratio: 1; background: #27ae60; border-radius: 15px; cursor: pointer; transition: all 0.3s ease;"></div>
+                    <div class="color-button" data-color="yellow" style="aspect-ratio: 1; background: #f1c40f; border-radius: 15px; cursor: pointer; transition: all 0.3s ease;"></div>
+                    <div class="color-button" data-color="purple" style="aspect-ratio: 1; background: #9b59b6; border-radius: 15px; cursor: pointer; transition: all 0.3s ease;"></div>
+                    <div class="color-button" data-color="orange" style="aspect-ratio: 1; background: #e67e22; border-radius: 15px; cursor: pointer; transition: all 0.3s ease;"></div>
+                </div>
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button id="startSequence" class="calc-button special" style="width: auto; padding: 1rem 2rem;">Start Sequence</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ultimate Success -->
+        <div class="ultimate-success hidden" id="finalSuccess">
+            <h2 style="margin-bottom: 2rem;">🎯 NERD CORE MASTER ACHIEVED!</h2>
+            <p style="font-size: 1.3rem; margin-bottom: 2rem;">
+                You have successfully navigated the most complex corporate puzzle ever created.
+                Your analytical skills and attention to detail are truly exceptional.
+            </p>
+            <div class="code-display">
+                UN7H1NK4BL3_N3RD_G0D_2024_ULT1M4T3
+            </div>
+            <p style="font-size: 1.1rem; opacity: 0.9;">
+                This code represents mastery of the "Unthinkable" difficulty level.<br>
+                You are among the elite few who can solve puzzles of this complexity.
+            </p>
+            <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(255,255,255,0.1); border-radius: 10px;">
+                <h4>Challenge Statistics:</h4>
+                <p>• 7 Complex Phases Completed</p>
+                <p>• 23 Hidden Clues Discovered</p>
+                <p>• 156 Unique Interactions Required</p>
+                <p>• Estimated Completion Time: 45-90 minutes</p>
+                <p>• Success Rate: &lt; 2% of all attempts</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Wilson & Associates Corporate Excellence Division. All rights reserved.</p>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.8;">
+                Serving Fortune 500 companies worldwide • ISO 9001:2015 Certified • SOC 2 Type II Compliant
+            </p>
+        </div>
+    </footer>
+
+    <style>
+        .network-node {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #3498db;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+        }
+        
+        .network-node:hover {
+            background: #2980b9;
+            transform: scale(1.1);
+        }
+        
+        .network-node.clicked {
+            background: #27ae60;
+            border-color: #2ecc71;
+            transform: scale(1.2);
+        }
+        
+        .color-button:hover {
+            transform: scale(1.05);
+            filter: brightness(110%);
+        }
+        
+        .color-button.flash {
+            animation: color-flash 0.5s ease;
+        }
+        
+        @keyframes color-flash {
+            0% { transform: scale(1); filter: brightness(100%); }
+            50% { transform: scale(1.1); filter: brightness(150%); }
+            100% { transform: scale(1); filter: brightness(100%); }
+        }
+    </style>
     <script src="script.js"></script>
 </body>
 </html>
