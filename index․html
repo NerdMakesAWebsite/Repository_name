@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wilson & Associates - Corporate Excellence Division</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --dark-gradient: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 100%);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.12);
+            --shadow-bold: 0 20px 60px rgba(0, 0, 0, 0.25);
+            --text-primary: #2c3e50;
+            --text-light: rgba(255, 255, 255, 0.9);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-size: 400% 400%;
+            animation: gradient-shift 15s ease infinite;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Floating particles background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+        
+        header {
+            background: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        header.scrolled {
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(30px);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            background: linear-gradient(45deg, #fff, #64b5f6, #e1f5fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--success-gradient);
+            border-radius: 1px;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover::after {
+            transform: scaleX(1);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+        
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 25px;
+            opacity: 0;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .nav-links a:hover::before {
+            opacity: 1;
+        }
+
+        .nav-links a:hover {
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        main {
+            margin-top: 80px;
+            min-height: calc(100vh - 80px);
+            position: relative;
+            z-index: 10;
+        }
+        
+        .hero {
+            background: transparent;
+            color: white;
+            text-align: center;
+            padding: 8rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 2rem;
+            font-weight: 800;
+            letter-spacing: -2px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #fff, #e3f2fd, #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: title-glow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes title-glow {
+            0% { filter: drop-shadow(0 0 5px rgba(255,255,255,0.3)); }
+            100% { filter: drop-shadow(0 0 20px rgba(255,255,255,0.6)); }
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            opacity: 0.95;
+            font-weight: 300;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .section {
+            padding: 5rem 0;
+            margin: 4rem 0;
+            background: var(--glass-bg);
+            border-radius: 30px;
+            box-shadow: var(--shadow-soft);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.8s ease;
+        }
+
+        .section:hover::before {
+            left: 100%;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-bold);
+        }
+        
+        .section h2 {
+            text-align: center;
+            margin-bottom: 4rem;
+            color: white;
+            font-size: 3rem;
+            font-weight: 700;
+            position: relative;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--success-gradient);
+            border-radius: 2px;
+            box-shadow: 0 2px 10px rgba(79, 172, 254, 0.5);
+        }
+
+        /* Enhanced Quiz Design */
+        .quiz-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .question {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            padding: 2.5rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            border: 1px solid var(--glass-border);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .question::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--primary-gradient);
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+        }
+        
+        .question:hover {
+            transform: translateX(10px) scale(1.02);
+            box-shadow: var(--shadow-bold);
+        }
+        
+        .question h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        
+        .options {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        .option {
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: left;
+            color: white;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .option:hover::before {
+            left: 100%;
+        }
+        
+        .option:hover {
+            border-color: rgba(79, 172, 254, 0.8);
+            background: rgba(79, 172, 254, 0.1);
+            transform: translateX(5px);
+            box-shadow: 0 10px 30px rgba(79, 172, 254, 0.2);
+        }
+        
+        .option.selected {
+            background: var(--success-gradient);
+            color: white;
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(79, 172, 254, 0.4);
+        }
+
+        /* Enhanced Employee Directory */
+        .employee-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+        
+        .employee-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 25px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+        }
+        
+        .employee-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--primary-gradient);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .employee-card:hover::before {
+            opacity: 0.1;
+        }
+        
+        .employee-card:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: var(--shadow-bold);
+        }
+        
+        .employee-card.clicked {
+            background: var(--success-gradient);
+            transform: scale(0.98);
+            box-shadow: inset 0 5px 20px rgba(0,0,0,0.2);
+        }
+        
+        .employee-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.15);
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            border: 3px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .employee-card:hover .employee-avatar {
+            transform: scale(1.1);
+            border-color: rgba(255,255,255,0.4);
+        }
+
+        /* Enhanced Security Panel */
+        .security-panel {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
+            color: white;
+            padding: 4rem;
+            border-radius: 25px;
+            box-shadow: var(--shadow-bold);
+            border: 1px solid var(--glass-border);
+            position: relative;
+        }
+
+        .security-panel::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--primary-gradient);
+            border-radius: 25px;
+            z-index: -1;
+            opacity: 0.3;
+        }
+        
+        .security-input {
+            width: 100%;
+            padding: 1.5rem;
+            font-size: 1.3rem;
+            border: none;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            margin: 1.5rem 0;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .security-input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(79, 172, 254, 0.8);
+            box-shadow: 0 0 20px rgba(79, 172, 254, 0.3);
+        }
+        
+        .security-input::placeholder {
+            color: rgba(255,255,255,0.6);
+        }
+        
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+        
+        .key-button {
+            aspect-ratio: 1;
+            border: none;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .key-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .key-button:hover::before {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .key-button:hover {
+            background: var(--success-gradient);
+            transform: scale(1.1);
+            box-shadow: 0 10px 25px rgba(79, 172, 254, 0.4);
+        }
+        
+        .key-button:active {
+            transform: scale(0.95);
+        }
+
+        /* Enhanced Document Viewer */
+        .document-viewer {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 3rem;
+            max-height: 500px;
+            overflow-y: auto;
+            font-family: 'Times New Roman', serif;
+            line-height: 2;
+            box-shadow: inset 0 4px 20px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .document-viewer::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .document-viewer::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        .document-viewer::-webkit-scrollbar-thumb {
+            background: var(--primary-gradient);
+            border-radius: 4px;
+        }
+        
+        .document-highlight {
+            background: rgba(255, 235, 59, 0.3);
+            padding: 4px 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 235, 59, 0.5);
+        }
+        
+        .document-highlight:hover {
+            background: rgba(255, 235, 59, 0.5);
+            box-shadow: 0 4px 15px rgba(255, 235, 59, 0.3);
+            transform: scale(1.02);
+        }
+        
+        .document-highlight.selected {
+            background: var(--secondary-gradient);
+            color: white;
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Enhanced Calculator */
+        .calculator {
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
+            border-radius: 25px;
+            padding: 3rem;
+            max-width: 450px;
+            margin: 0 auto;
+            box-shadow: var(--shadow-bold);
+            border: 1px solid var(--glass-border);
+        }
+        
+        .calc-display {
+            width: 100%;
+            height: 100px;
+            font-size: 2.5rem;
+            text-align: right;
+            padding: 1.5rem;
+            border: none;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            margin-bottom: 2rem;
+            font-family: 'Courier New', monospace;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .calc-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+        
+        .calc-button {
+            aspect-ratio: 1;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .calc-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .calc-button:hover::before {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .calc-button.number {
+            background: rgba(79, 172, 254, 0.2);
+            color: white;
+        }
+
+        .calc-button.number::before {
+            background: rgba(79, 172, 254, 0.3);
+        }
+        
+        .calc-button.operator {
+            background: rgba(245, 87, 108, 0.2);
+            color: white;
+        }
+
+        .calc-button.operator::before {
+            background: rgba(245, 87, 108, 0.3);
+        }
+        
+        .calc-button.special {
+            background: rgba(240, 147, 251, 0.2);
+            color: white;
+        }
+
+        .calc-button.special::before {
+            background: rgba(240, 147, 251, 0.3);
+        }
+        
+        .calc-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Enhanced Progress */
+        .progress-container {
+            position: fixed;
+            top: 120px;
+            right: 30px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-soft);
+            z-index: 999;
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
+
+        .progress-container:hover {
+            transform: scale(1.05);
+        }
+        
+        .progress-circle {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: conic-gradient(var(--success-gradient) 0deg, rgba(255,255,255,0.1) 0deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .progress-circle::before {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            z-index: -1;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .phase-complete {
+            animation: phase-celebration 2s ease-in-out;
+        }
+        
+        @keyframes phase-celebration {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.05); }
+            50% { transform: scale(1.1); box-shadow: var(--shadow-bold); }
+            75% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .ultimate-success {
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
+            color: white;
+            padding: 5rem;
+            border-radius: 30px;
+            text-align: center;
+            margin: 4rem 0;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-bold);
+        }
+        
+        .ultimate-success::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            animation: success-shimmer 4s ease-in-out infinite;
+        }
+        
+        @keyframes success-shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        .code-display {
+            font-family: 'Courier New', monospace;
+            font-size: 2rem;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 3rem 0;
+            letter-spacing: 3px;
+            word-break: break-all;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-shadow: 0 0 10px rgba(79, 172, 254, 0.5);
+        }
+
+        footer {
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
+            color: white;
+            text-align: center;
+            padding: 4rem 0;
+            margin-top: 5rem;
+            border-top: 1px solid var(--glass-border);
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .employee-grid { grid-template-columns: 1fr; }
+            .progress-container { right: 15px; top: 110px; }
+            .security-grid { grid-template-columns: repeat(3, 1fr); }
+            .section { margin: 2rem 0; padding: 3rem 0; }
+        }
+
+        /* Loading animations */
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+
+        .loading {
+            animation: pulse 1.5s ease-in-out infinite;
+        }}
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">Wilson & Associates</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#history">History</a></li>
+                <li><a href="#team">Team</a></li>
+                <li><a href="#security">Security</a></li>
+                <li><a href="#documents">Documents</a></li>
+                <li><a href="#financial">Financial</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="progress-container">
+        <div class="progress-circle" id="progressCircle">0%</div>
+        <div style="text-align: center; margin-top: 0.5rem; font-size: 0.8rem; color: #666;">
+            Progress
+        </div>
+    </div>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content container">
+                <h1>Corporate Excellence Division</h1>
+                <p>For over three decades, we've partnered with leading enterprises to deliver transformative, technology-led solutions with unmatched precision and insight.</p>
+                <p style="font-size: 1rem; opacity: 0.8; margin-top: 1rem;">
+                   Established in the late 1980s • Global Headquarters: New York • 12,000+ Professionals Worldwide
+                </p>
+            </div>
+        </section>
+
+        <!-- Phase 1: Company History Quiz -->
+        <section class="section" id="phase1">
+            <div class="container">
+                <h2>Company History Assessment</h2>
+                <p style="text-align: center; margin-bottom: 3rem; color: #666; font-size: 1.1rem;">
+                    Please complete this brief assessment about our company history to proceed
+                </p>
+                <div class="quiz-container">
+                    <div class="question">
+                        <h3>1. Wilson & Associates was founded in which year?</h3>
+                        <div class="options">
+                            <div class="option" data-answer="1985">1985</div>
+                            <div class="option" data-answer="1987">1987</div>
+                            <div class="option" data-answer="1989">1989</div>
+                            <div class="option" data-answer="1991">1991</div>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <h3>2. Our first major client was from which industry?</h3>
+                        <div class="options">
+                            <div class="option" data-answer="automotive">Automotive</div>
+                            <div class="option" data-answer="technology">Technology</div>
+                            <div class="option" data-answer="aerospace">Aerospace</div>
+                            <div class="option" data-answer="pharmaceutical">Pharmaceutical</div>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <h3>3. The company motto "Excellence Through Innovation" was adopted in:</h3>
+                        <div class="options">
+                            <div class="option" data-answer="1992">1992</div>
+                            <div class="option" data-answer="1994">1994</div>
+                            <div class="option" data-answer="1996">1996</div>
+                            <div class="option" data-answer="1998">1998</div>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <h3>4. Our international expansion began with an office in:</h3>
+                        <div class="options">
+                            <div class="option" data-answer="london">London</div>
+                            <div class="option" data-answer="tokyo">Tokyo</div>
+                            <div class="option" data-answer="frankfurt">Frankfurt</div>
+                            <div class="option" data-answer="singapore">Singapore</div>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <h3>5. The Wilson Innovation Award was first presented in:</h3>
+                        <div class="options">
+                            <div class="option" data-answer="2001">2001</div>
+                            <div class="option" data-answer="2003">2003</div>
+                            <div class="option" data-answer="2005">2005</div>
+                            <div class="option" data-answer="2007">2007</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase 2: Employee Directory -->
+        <section class="section hidden" id="phase2">
+            <div class="container">
+                <h2>Employee Directory Access</h2>
+                <p style="text-align: center; margin-bottom: 3rem; color: #666; font-size: 1.1rem;">
+                    Please select our department heads in order of seniority (longest tenure first)
+                </p>
+                <div class="employee-grid">
+                    <div class="employee-card" data-employee="sarah" data-tenure="2003">
+                        <div class="employee-avatar">SJ</div>
+                        <h3>Sarah Johnson</h3>
+                        <p>Chief Technology Officer</p>
+                        <p style="opacity: 0.8; font-size: 0.9rem; margin-top: 0.5rem;">Joined: 2003</p>
+                    </div>
+                    <div class="employee-card" data-employee="michael" data-tenure="1999">
+                        <div class="employee-avatar">MR</div>
+                        <h3>Michael Rodriguez</h3>
+                        <p>Chief Financial Officer</p>
+                        <p style="opacity: 0.8; font-size: 0.9rem; margin-top: 0.5rem;">Joined: 1999</p>
+                    </div>
+                    <div class="employee-card" data-employee="emily" data-tenure="2008">
+                        <div class="employee-avatar">EC</div>
+                        <h3>Emily Chen</h3>
+                        <p>Chief Marketing Officer</p>
+                        <p style="opacity: 0.8; font-size: 0.9rem; margin-top: 0.5rem;">Joined: 2008</p>
+                    </div>
+                    <div class="employee-card" data-employee="david" data-tenure="1995">
+                        <div class="employee-avatar">DW</div>
+                        <h3>David Wilson</h3>
+                        <p>Chief Executive Officer</p>
+                        <p style="opacity: 0.8; font-size: 0.9rem; margin-top: 0.5rem;">Joined: 1995</p>
+                    </div>
+                    <div class="employee-card" data-employee="lisa" data-tenure="2011">
+                        <div class="employee-avatar">LT</div>
+                        <h3>Lisa Thompson</h3>
+                        <p>Chief Human Resources Officer</p>
+                        <p style="opacity: 0.8; font-size: 0.9rem; margin-top: 0.5rem;">Joined: 2011</p>
+                    </div>
+                    <div class="employee-card" data-employee="robert" data-tenure="2001">
+                        <div class="employee-avatar">RK</div>
+                        <h3>Robert Kim</h3>
+                        <p>Chief Operations Officer</p>
+                        <p style="opacity: 0.8; font-size: 0.9rem; margin-top: 0.5rem;">Joined: 2001</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase 3: Security Access -->
+        <section class="section hidden" id="phase3">
+            <div class="container">
+                <h2>Security Verification</h2>
+                <p style="text-align: center; margin-bottom: 3rem; color: #666; font-size: 1.1rem;">
+                    The code is based on where we began and where we are now — then think in reverse.
+                </p>
+                <div class="security-panel">
+                    <h3 style="text-align: center; margin-bottom: 2rem;">SECURE ACCESS TERMINAL</h3>
+                    <input type="text" class="security-input" id="securityCode" placeholder="Enter Access Code" maxlength="8">
+                    <div class="security-grid">
+                        <button class="key-button" data-key="1">1</button>
+                        <button class="key-button" data-key="2">2</button>
+                        <button class="key-button" data-key="3">3</button>
+                        <button class="key-button" data-key="A">A</button>
+                        <button class="key-button" data-key="4">4</button>
+                        <button class="key-button" data-key="5">5</button>
+                        <button class="key-button" data-key="6">6</button>
+                        <button class="key-button" data-key="B">B</button>
+                        <button class="key-button" data-key="7">7</button>
+                        <button class="key-button" data-key="8">8</button>
+                        <button class="key-button" data-key="9">9</button>
+                        <button class="key-button" data-key="C">C</button>
+                        <button class="key-button" data-key="*">*</button>
+                        <button class="key-button" data-key="0">0</button>
+                        <button class="key-button" data-key="#">#</button>
+                        <button class="key-button" data-key="D">D</button>
+                    </div>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <button class="key-button special" id="clearBtn" style="flex: 1;">CLEAR</button>
+                        <button class="key-button special" id="enterBtn" style="flex: 1;">ENTER</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase 4: Document Analysis -->
+        <section class="section hidden" id="phase4">
+            <div class="container">
+                <h2>Document Analysis</h2>
+                <p style="text-align: center; margin-bottom: 3rem; color: #666; font-size: 1.1rem;">
+                    Review the document below and identify all the financial figures (click to highlight)
+                </p>
+                <div class="document-viewer">
+                    <h3 style="text-align: center; margin-bottom: 2rem;">QUARTERLY FINANCIAL REPORT - Q3 2025</h3>
+                    <p>Wilson & Associates is pleased to report strong financial performance for the third quarter of 2024. Our total revenue reached <span class="document-highlight" data-value="127.5">$127.5 million</span>, representing a significant increase from the previous quarter.</p>
+                    
+                    <p>Operating expenses for the quarter totaled <span class="document-highlight" data-value="58.5">$58.5 million</span>, which includes a one-time infrastructure investment of <span class="document-highlight" data-value="15.7">$15.7 million</span>. Our gross profit margin improved to <span class="document-highlight" data-value="38.3">38.3%</span>, exceeding our projected target of 35%.</p>
+                    
+                    <p>Revenue sources this quarter were led by our Consulting services, which generated <span class="document-highlight" data-value="143.8">$143.8 million</span>, followed by Technology at <span class="document-highlight" data-value="89.2">$89.2 million</span>.</p>
+                    
+                    <p>Employee headcount increased by <span class="document-highlight" data-value="247">247</span> professionals this quarter, bringing our total workforce to <span class="document-highlight" data-value="12459">12,459</span> employees globally. Research and development investments totaled <span class="document-highlight" data-value="18.3">$18.3 million</span>, representing <span class="document-highlight" data-value="14.4">14.4%</span> of our total revenue.</p>
+                    
+                    <p>Looking ahead to Q4, we project revenue growth of approximately <span class="document-highlight" data-value="12.8">12.8%</span>, with total anticipated revenue of <span class="document-highlight" data-value="144.1">$144.1 million</span>. Our cash reserves stand at <span class="document-highlight" data-value="892.1">$892.1 million</span>, providing strong financial stability for future expansion initiatives.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase 5: Financial Calculator -->
+        <section class="section hidden" id="phase5">
+            <div class="container">
+                <h2>Financial Calculation Verification</h2>
+                <p style="text-align: center; margin-bottom: 3rem; color: #666; font-size: 1.1rem;">
+                    Calculate the sum of all revenue figures from the previous document
+                </p>
+                <div class="calculator">
+                    <input type="text" class="calc-display" id="calcDisplay" readonly placeholder="0">
+                    <div class="calc-grid">
+                        <button class="calc-button special" data-calc="C">C</button>
+                        <button class="calc-button special" data-calc="±">±</button>
+                        <button class="calc-button special" data-calc="%">%</button>
+                        <button class="calc-button operator" data-calc="÷">÷</button>
+                        <button class="calc-button number" data-calc="7">7</button>
+                        <button class="calc-button number" data-calc="8">8</button>
+                        <button class="calc-button number" data-calc="9">9</button>
+                        <button class="calc-button operator" data-calc="×">×</button>
+                        <button class="calc-button number" data-calc="4">4</button>
+                        <button class="calc-button number" data-calc="5">5</button>
+                        <button class="calc-button number" data-calc="6">6</button>
+                        <button class="calc-button operator" data-calc="−">−</button>
+                        <button class="calc-button number" data-calc="1">1</button>
+                        <button class="calc-button number" data-calc="2">2</button>
+                        <button class="calc-button number" data-calc="3">3</button>
+                        <button class="calc-button operator" data-calc="+">+</button>
+                        <button class="calc-button number" data-calc="0" style="grid-column: span 2;">0</button>
+                        <button class="calc-button number" data-calc=".">.</button>
+                        <button class="calc-button operator" data-calc="=">=</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase 6: Network Topology -->
+        <section class="section hidden" id="phase6">
+            <div class="container">
+                <h2>Network Topology Analysis</h2>
+                <p style="text-align: center; margin-bottom: 3rem; color: #666; font-size: 1.1rem;">
+                    Identify the correct redundancy path by selecting the nodes in operational sequence.
+                </p>
+                <div style="position: relative; height: 400px; background: #2c3e50; border-radius: 15px; margin: 2rem 0;">
+                    <svg width="100%" height="100%" style="position: absolute; top: 0; left: 0;">
+                        <!-- Network connections -->
+                        <line x1="10%" y1="20%" x2="30%" y2="40%" stroke="#3498db" stroke-width="2" opacity="0.5"/>
+                        <line x1="30%" y1="40%" x2="50%" y2="20%" stroke="#3498db" stroke-width="2" opacity="0.5"/>
+                        <line x1="50%" y1="20%" x2="70%" y2="40%" stroke="#3498db" stroke-width="2" opacity="0.5"/>
+                        <line x1="70%" y1="40%" x2="90%" y2="20%" stroke="#3498db" stroke-width="2" opacity="0.5"/>
+                        <line x1="10%" y1="20%" x2="20%" y2="70%" stroke="#3498db" stroke-width="2" opacity="0.5"/>
+                        <line x1="20%" y1="70%" x2="50%" y2="80%" stroke="#3498db" stroke-width="2" opacity="0.5"/>
+                        <line x1="50%" y1="80%" x2="80%" y2="70%" stroke="#3498db" stroke-width="2" opacity="0.5"/>
+                        <line x1="80%" y1="70%" x2="90%" y2="20%" stroke="#3498db" stroke-width="2" opacity="0.5"/>
+                        <line x1="30%" y1="40%" x2="20%" y2="70%" stroke="#3498db" stroke-width="2" opacity="0.5"/>
+                        <line x1="50%" y1="20%" x2="50%" y2="80%" stroke="#3498db" stroke-width="2" opacity="0.5"/>
+                        <line x1="70%" y1="40%" x2="80%" y2="70%" stroke="#3498db" stroke-width="2" opacity="0.5"/>
+                    </svg>
+                    <div class="network-node" data-node="A" style="position: absolute; top: 15%; left: 8%;">A</div>
+                    <div class="network-node" data-node="B" style="position: absolute; top: 35%; left: 28%;">B</div>
+                    <div class="network-node" data-node="C" style="position: absolute; top: 15%; left: 48%;">C</div>
+                    <div class="network-node" data-node="D" style="position: absolute; top: 35%; left: 68%;">D</div>
+                    <div class="network-node" data-node="E" style="position: absolute; top: 15%; left: 88%;">E</div>
+                    <div class="network-node" data-node="F" style="position: absolute; top: 65%; left: 18%;">F</div>
+                    <div class="network-node" data-node="G" style="position: absolute; top: 75%; left: 48%;">G</div>
+                    <div class="network-node" data-node="H" style="position: absolute; top: 65%; left: 78%;">H</div>
+                </div>
+                <p style="text-align: center; color: #666; font-size: 0.9rem; margin-top: 1rem;">
+                    Hint: Follow the chain of continuity — from initiation to fallback to containment.
+                </p>
+            </div>
+        </section>
+
+        <!-- Phase 7: Color Sequence Memory -->
+        <section class="section hidden" id="phase7">
+            <div class="container">
+                <h2>Security Pattern Recognition</h2>
+                <p style="text-align: center; margin-bottom: 3rem; color: #666; font-size: 1.1rem;">
+                    Memorize and repeat the color sequence (watch carefully!)
+                </p>
+                <div class="color-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; max-width: 300px; margin: 0 auto;">
+                    <div class="color-button" data-color="red" style="aspect-ratio: 1; background: #e74c3c; border-radius: 15px; cursor: pointer; transition: all 0.3s ease;"></div>
+                    <div class="color-button" data-color="blue" style="aspect-ratio: 1; background: #3498db; border-radius: 15px; cursor: pointer; transition: all 0.3s ease;"></div>
+                    <div class="color-button" data-color="green" style="aspect-ratio: 1; background: #27ae60; border-radius: 15px; cursor: pointer; transition: all 0.3s ease;"></div>
+                    <div class="color-button" data-color="yellow" style="aspect-ratio: 1; background: #f1c40f; border-radius: 15px; cursor: pointer; transition: all 0.3s ease;"></div>
+                    <div class="color-button" data-color="purple" style="aspect-ratio: 1; background: #9b59b6; border-radius: 15px; cursor: pointer; transition: all 0.3s ease;"></div>
+                    <div class="color-button" data-color="orange" style="aspect-ratio: 1; background: #e67e22; border-radius: 15px; cursor: pointer; transition: all 0.3s ease;"></div>
+                </div>
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button id="startSequence" class="calc-button special" style="width: auto; padding: 1rem 2rem;">Start Sequence</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ultimate Success -->
+        <div class="ultimate-success hidden" id="finalSuccess">
+            <h2 style="margin-bottom: 2rem;">🔓 SECRET CODE UNLOCKED!</h2>
+            <p style="font-size: 1.3rem; margin-bottom: 2rem;">
+                Nice work. You’ve just deciphered a code that only a few can even glimpse.
+                Your precision and insight are on another level.
+            </p>
+            <div class="code-display">
+                0101-4A3F-.-.- ... -...- QmFzZTY0
+            </div>
+            <p style="font-size: 1.1rem; opacity: 0.9;">
+                This sequence marks your passage through the most cryptic challenge.<br>
+                Few understand its meaning — fewer still have earned it.
+            </p>
+            <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(255,255,255,0.1); border-radius: 10px;">
+                <h4>Challenge Summary:</h4>
+                <p>• 7 Complex Phases Completed</p>
+                <p>• 23 Hidden Clues Discovered</p>
+                <p>• 156 Unique Interactions Required</p>
+                <p>• Estimated Completion Time: 45-90 minutes</p>
+                <p>• Success Rate: &lt; 2% of all attempts</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Wilson & Associates — Corporate Excellence Division. All rights reserved.</p>
+            <p style="font-size: 1rem; margin-top: 0.5rem; opacity: 0.8;">
+                Guided by a commitment to innovation — a principle we formally embraced in the early 1990s — we expanded operations across Asia, starting in a dynamic hub of global business. Since the mid-2000s, we’ve proudly recognized breakthrough thinking with our signature innovation award.
+            </p>
+			<p style="font-size: 0.7rem; margin-top: 0.5rem; opacity: 0.8;">
+			    ISO 9001:2015 Certified • SOC 2 Type II Compliant
+			</p>
+        </div>
+    </footer>
+
+    <style>
+        .network-node {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #3498db;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+        }
+        
+        .network-node:hover {
+            background: #2980b9;
+            transform: scale(1.1);
+        }
+        
+        .network-node.clicked {
+            background: #27ae60;
+            border-color: #2ecc71;
+            transform: scale(1.2);
+        }
+        
+        .color-button:hover {
+            transform: scale(1.05);
+            filter: brightness(110%);
+        }
+        
+        .color-button.flash {
+            animation: color-flash 0.5s ease;
+        }
+        
+        @keyframes color-flash {
+            0% { transform: scale(1); filter: brightness(100%); }
+            50% { transform: scale(1.1); filter: brightness(150%); }
+            100% { transform: scale(1); filter: brightness(100%); }
+        }
+    </style>
+    <script src="function.js"></script>
+</body>
+</html>
