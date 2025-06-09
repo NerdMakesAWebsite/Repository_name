@@ -5,6 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wilson & Associates - Corporate Excellence Division</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --dark-gradient: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 100%);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.12);
+            --shadow-bold: 0 20px 60px rgba(0, 0, 0, 0.25);
+            --text-primary: #2c3e50;
+            --text-light: rgba(255, 255, 255, 0.9);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -12,29 +27,69 @@
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.6;
-            color: #2c3e50;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-primary);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-size: 400% 400%;
+            animation: gradient-shift 15s ease infinite;
             min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 0 20px;
         }
         
+        /* Floating particles background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+        
         header {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
             color: white;
-            padding: 1.5rem 0;
+            padding: 1rem 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-            backdrop-filter: blur(10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        header.scrolled {
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(30px);
         }
         
         nav {
@@ -45,73 +100,88 @@
         }
         
         .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            background: linear-gradient(45deg, #fff, #e3f2fd);
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            background: linear-gradient(45deg, #fff, #64b5f6, #e1f5fe);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--success-gradient);
+            border-radius: 1px;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover::after {
+            transform: scaleX(1);
         }
         
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 2.5rem;
+            gap: 3rem;
             flex-wrap: wrap;
         }
         
         .nav-links a {
-            color: rgba(255,255,255,0.9);
+            color: var(--text-light);
             text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
         }
         
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background: linear-gradient(90deg, #64b5f6, #42a5f5);
-            transition: width 0.3s ease;
-        }
-        
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-        
-        .nav-links a:hover {
-            color: white;
-            text-shadow: 0 0 10px rgba(255,255,255,0.5);
-        }
-        
-        main {
-            margin-top: 100px;
-            min-height: calc(100vh - 100px);
-        }
-        
-        .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-align: center;
-            padding: 6rem 0;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero::before {
+        .nav-links a::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.05)" points="0,0 1000,300 1000,1000 0,700"/></svg>');
-            background-size: cover;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 25px;
+            opacity: 0;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .nav-links a:hover::before {
+            opacity: 1;
+        }
+
+        .nav-links a:hover {
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        main {
+            margin-top: 80px;
+            min-height: calc(100vh - 80px);
+            position: relative;
+            z-index: 10;
+        }
+        
+        .hero {
+            background: transparent;
+            color: white;
+            text-align: center;
+            padding: 8rem 0;
+            position: relative;
+            overflow: hidden;
         }
         
         .hero-content {
@@ -120,183 +190,295 @@
         }
         
         .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            font-weight: 300;
-            letter-spacing: -1px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            font-size: 4.5rem;
+            margin-bottom: 2rem;
+            font-weight: 800;
+            letter-spacing: -2px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #fff, #e3f2fd, #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: title-glow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes title-glow {
+            0% { filter: drop-shadow(0 0 5px rgba(255,255,255,0.3)); }
+            100% { filter: drop-shadow(0 0 20px rgba(255,255,255,0.6)); }
         }
         
         .hero p {
-            font-size: 1.4rem;
-            margin-bottom: 2.5rem;
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
             opacity: 0.95;
             font-weight: 300;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .section {
-            padding: 4rem 0;
-            margin: 3rem 0;
-            background: rgba(255,255,255,0.95);
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-        
-        .section h2 {
-            text-align: center;
-            margin-bottom: 3rem;
-            color: #1e3c72;
-            font-size: 2.5rem;
-            font-weight: 600;
-            position: relative;
-        }
-        
-        .section h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            border-radius: 2px;
-        }
-
-        /* Phase 1: Company History Quiz */
-        .quiz-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .question {
-            background: #f8f9fa;
-            padding: 2rem;
-            border-radius: 15px;
-            margin-bottom: 1.5rem;
-            border-left: 5px solid #3498db;
-            transition: all 0.3s ease;
-        }
-        
-        .question:hover {
-            transform: translateX(5px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        }
-        
-        .question h3 {
-            color: #2c3e50;
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-        }
-        
-        .options {
-            display: grid;
-            gap: 0.5rem;
-        }
-        
-        .option {
-            padding: 0.8rem 1.2rem;
-            background: white;
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: left;
-        }
-        
-        .option:hover {
-            border-color: #3498db;
-            background: #f0f8ff;
-        }
-        
-        .option.selected {
-            background: #3498db;
-            color: white;
-            border-color: #2980b9;
-        }
-
-        /* Phase 2: Employee Directory */
-        .employee-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-        
-        .employee-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 5rem 0;
+            margin: 4rem 0;
+            background: var(--glass-bg);
+            border-radius: 30px;
+            box-shadow: var(--shadow-soft);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
             position: relative;
             overflow: hidden;
+            transition: all 0.3s ease;
         }
-        
-        .employee-card::before {
+
+        .section::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.8s ease;
+        }
+
+        .section:hover::before {
+            left: 100%;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-bold);
         }
         
-        .employee-card:hover::before {
+        .section h2 {
+            text-align: center;
+            margin-bottom: 4rem;
+            color: white;
+            font-size: 3rem;
+            font-weight: 700;
+            position: relative;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--success-gradient);
+            border-radius: 2px;
+            box-shadow: 0 2px 10px rgba(79, 172, 254, 0.5);
+        }
+
+        /* Enhanced Quiz Design */
+        .quiz-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .question {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            padding: 2.5rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            border: 1px solid var(--glass-border);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .question::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--primary-gradient);
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+        }
+        
+        .question:hover {
+            transform: translateX(10px) scale(1.02);
+            box-shadow: var(--shadow-bold);
+        }
+        
+        .question h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        
+        .options {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        .option {
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: left;
+            color: white;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .option:hover::before {
             left: 100%;
         }
         
+        .option:hover {
+            border-color: rgba(79, 172, 254, 0.8);
+            background: rgba(79, 172, 254, 0.1);
+            transform: translateX(5px);
+            box-shadow: 0 10px 30px rgba(79, 172, 254, 0.2);
+        }
+        
+        .option.selected {
+            background: var(--success-gradient);
+            color: white;
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(79, 172, 254, 0.4);
+        }
+
+        /* Enhanced Employee Directory */
+        .employee-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+        
+        .employee-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 25px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+        }
+        
+        .employee-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--primary-gradient);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .employee-card:hover::before {
+            opacity: 0.1;
+        }
+        
         .employee-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: var(--shadow-bold);
         }
         
         .employee-card.clicked {
-            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
-            transform: scale(0.95);
+            background: var(--success-gradient);
+            transform: scale(0.98);
+            box-shadow: inset 0 5px 20px rgba(0,0,0,0.2);
         }
         
         .employee-avatar {
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.2);
-            margin: 0 auto 1rem;
+            background: rgba(255,255,255,0.15);
+            margin: 0 auto 1.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: bold;
+            border: 3px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
         }
 
-        /* Phase 3: Security Access */
+        .employee-card:hover .employee-avatar {
+            transform: scale(1.1);
+            border-color: rgba(255,255,255,0.4);
+        }
+
+        /* Enhanced Security Panel */
         .security-panel {
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
-            background: #2c3e50;
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
             color: white;
-            padding: 3rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            padding: 4rem;
+            border-radius: 25px;
+            box-shadow: var(--shadow-bold);
+            border: 1px solid var(--glass-border);
+            position: relative;
+        }
+
+        .security-panel::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--primary-gradient);
+            border-radius: 25px;
+            z-index: -1;
+            opacity: 0.3;
         }
         
         .security-input {
             width: 100%;
-            padding: 1rem;
-            font-size: 1.2rem;
+            padding: 1.5rem;
+            font-size: 1.3rem;
             border: none;
-            border-radius: 8px;
-            background: #34495e;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
             color: white;
-            margin: 1rem 0;
+            margin: 1.5rem 0;
             text-align: center;
             font-family: 'Courier New', monospace;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .security-input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(79, 172, 254, 0.8);
+            box-shadow: 0 0 20px rgba(79, 172, 254, 0.3);
         }
         
         .security-input::placeholder {
@@ -306,154 +488,242 @@
         .security-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 1rem;
-            margin: 2rem 0;
+            gap: 1.5rem;
+            margin: 3rem 0;
         }
         
         .key-button {
             aspect-ratio: 1;
             border: none;
-            border-radius: 8px;
-            background: #3498db;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
             color: white;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .key-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .key-button:hover::before {
+            width: 100%;
+            height: 100%;
         }
         
         .key-button:hover {
-            background: #2980b9;
-            transform: scale(1.05);
+            background: var(--success-gradient);
+            transform: scale(1.1);
+            box-shadow: 0 10px 25px rgba(79, 172, 254, 0.4);
         }
         
         .key-button:active {
             transform: scale(0.95);
         }
 
-        /* Phase 4: Document Analysis */
+        /* Enhanced Document Viewer */
         .document-viewer {
-            background: #ecf0f1;
-            border-radius: 15px;
-            padding: 2rem;
-            max-height: 400px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 3rem;
+            max-height: 500px;
             overflow-y: auto;
             font-family: 'Times New Roman', serif;
-            line-height: 1.8;
-            box-shadow: inset 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        .document-highlight {
-            background: yellow;
-            padding: 2px 4px;
-            border-radius: 3px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .document-highlight:hover {
-            background: #ffd700;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-        
-        .document-highlight.selected {
-            background: #ff6b6b;
+            line-height: 2;
+            box-shadow: inset 0 4px 20px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             color: white;
         }
 
-        /* Phase 5: Financial Calculator */
+        .document-viewer::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .document-viewer::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        .document-viewer::-webkit-scrollbar-thumb {
+            background: var(--primary-gradient);
+            border-radius: 4px;
+        }
+        
+        .document-highlight {
+            background: rgba(255, 235, 59, 0.3);
+            padding: 4px 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 235, 59, 0.5);
+        }
+        
+        .document-highlight:hover {
+            background: rgba(255, 235, 59, 0.5);
+            box-shadow: 0 4px 15px rgba(255, 235, 59, 0.3);
+            transform: scale(1.02);
+        }
+        
+        .document-highlight.selected {
+            background: var(--secondary-gradient);
+            color: white;
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Enhanced Calculator */
         .calculator {
-            background: #2c3e50;
-            border-radius: 15px;
-            padding: 2rem;
-            max-width: 400px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
+            border-radius: 25px;
+            padding: 3rem;
+            max-width: 450px;
             margin: 0 auto;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: var(--shadow-bold);
+            border: 1px solid var(--glass-border);
         }
         
         .calc-display {
             width: 100%;
-            height: 80px;
-            font-size: 2rem;
+            height: 100px;
+            font-size: 2.5rem;
             text-align: right;
-            padding: 1rem;
+            padding: 1.5rem;
             border: none;
-            border-radius: 8px;
-            background: #34495e;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
             color: white;
-            margin-bottom: 1rem;
+            margin-bottom: 2rem;
             font-family: 'Courier New', monospace;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
         .calc-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 1rem;
+            gap: 1.5rem;
         }
         
         .calc-button {
             aspect-ratio: 1;
             border: none;
-            border-radius: 8px;
-            font-size: 1.2rem;
+            border-radius: 15px;
+            font-size: 1.4rem;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .calc-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .calc-button:hover::before {
+            width: 100%;
+            height: 100%;
         }
         
         .calc-button.number {
-            background: #3498db;
+            background: rgba(79, 172, 254, 0.2);
             color: white;
+        }
+
+        .calc-button.number::before {
+            background: rgba(79, 172, 254, 0.3);
         }
         
         .calc-button.operator {
-            background: #e74c3c;
+            background: rgba(245, 87, 108, 0.2);
             color: white;
+        }
+
+        .calc-button.operator::before {
+            background: rgba(245, 87, 108, 0.3);
         }
         
         .calc-button.special {
-            background: #f39c12;
+            background: rgba(240, 147, 251, 0.2);
             color: white;
+        }
+
+        .calc-button.special::before {
+            background: rgba(240, 147, 251, 0.3);
         }
         
         .calc-button:hover {
             transform: scale(1.05);
-            filter: brightness(110%);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
 
-        /* Success and Progress */
+        /* Enhanced Progress */
         .progress-container {
             position: fixed;
             top: 120px;
-            right: 20px;
-            background: rgba(255,255,255,0.95);
-            padding: 1rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            right: 30px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-soft);
             z-index: 999;
-            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
+
+        .progress-container:hover {
+            transform: scale(1.05);
         }
         
         .progress-circle {
-            width: 80px;
-            height: 80px;
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
-            background: conic-gradient(#3498db 0deg, #ecf0f1 0deg);
+            background: conic-gradient(var(--success-gradient) 0deg, rgba(255,255,255,0.1) 0deg);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #2c3e50;
+            color: white;
             font-weight: bold;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             position: relative;
+            transition: all 0.3s ease;
         }
         
         .progress-circle::before {
             content: '';
             position: absolute;
-            width: 60px;
-            height: 60px;
-            background: white;
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
             border-radius: 50%;
             z-index: -1;
         }
@@ -463,24 +733,29 @@
         }
         
         .phase-complete {
-            animation: phase-glow 2s ease-in-out;
+            animation: phase-celebration 2s ease-in-out;
         }
         
-        @keyframes phase-glow {
-            0% { box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
-            50% { box-shadow: 0 10px 40px rgba(52, 152, 219, 0.4); }
-            100% { box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
+        @keyframes phase-celebration {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.05); }
+            50% { transform: scale(1.1); box-shadow: var(--shadow-bold); }
+            75% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
         
         .ultimate-success {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
             color: white;
-            padding: 4rem;
-            border-radius: 20px;
+            padding: 5rem;
+            border-radius: 30px;
             text-align: center;
-            margin: 3rem 0;
+            margin: 4rem 0;
             position: relative;
             overflow: hidden;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-bold);
         }
         
         .ultimate-success::before {
@@ -491,7 +766,7 @@
             width: 200%;
             height: 200%;
             background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
-            animation: success-shimmer 3s ease-in-out infinite;
+            animation: success-shimmer 4s ease-in-out infinite;
         }
         
         @keyframes success-shimmer {
@@ -501,29 +776,46 @@
         
         .code-display {
             font-family: 'Courier New', monospace;
-            font-size: 1.8rem;
-            background: rgba(0,0,0,0.3);
-            padding: 1.5rem;
-            border-radius: 10px;
-            margin: 2rem 0;
-            letter-spacing: 2px;
+            font-size: 2rem;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 3rem 0;
+            letter-spacing: 3px;
             word-break: break-all;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-shadow: 0 0 10px rgba(79, 172, 254, 0.5);
         }
 
         footer {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
             color: white;
             text-align: center;
-            padding: 3rem 0;
-            margin-top: 4rem;
+            padding: 4rem 0;
+            margin-top: 5rem;
+            border-top: 1px solid var(--glass-border);
         }
         
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
+            .hero h1 { font-size: 3rem; }
             .employee-grid { grid-template-columns: 1fr; }
-            .progress-container { right: 10px; top: 110px; }
+            .progress-container { right: 15px; top: 110px; }
             .security-grid { grid-template-columns: repeat(3, 1fr); }
+            .section { margin: 2rem 0; padding: 3rem 0; }
         }
+
+        /* Loading animations */
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+
+        .loading {
+            animation: pulse 1.5s ease-in-out infinite;
+        }}
     </style>
 </head>
 <body>
@@ -552,9 +844,9 @@
         <section class="hero">
             <div class="hero-content container">
                 <h1>Corporate Excellence Division</h1>
-                <p>Serving Fortune 500 companies since 1987 with unparalleled expertise</p>
+                <p>For over three decades, we've partnered with leading enterprises to deliver transformative, technology-led solutions with unmatched precision and insight.</p>
                 <p style="font-size: 1rem; opacity: 0.8; margin-top: 1rem;">
-                    Est. 1987 • Global Headquarters: New York • 12,000+ Employees Worldwide
+                   Established in the late 1980s • Global Headquarters: New York • 12,000+ Professionals Worldwide
                 </p>
             </div>
         </section>
@@ -673,7 +965,7 @@
             <div class="container">
                 <h2>Security Verification</h2>
                 <p style="text-align: center; margin-bottom: 3rem; color: #666; font-size: 1.1rem;">
-                    Enter the security access code to continue
+                    The code is based on where we began and where we are now — then think in reverse.
                 </p>
                 <div class="security-panel">
                     <h3 style="text-align: center; margin-bottom: 2rem;">SECURE ACCESS TERMINAL</h3>
@@ -712,16 +1004,16 @@
                     Review the document below and identify all the financial figures (click to highlight)
                 </p>
                 <div class="document-viewer">
-                    <h3 style="text-align: center; margin-bottom: 2rem;">QUARTERLY FINANCIAL REPORT - Q3 2024</h3>
+                    <h3 style="text-align: center; margin-bottom: 2rem;">QUARTERLY FINANCIAL REPORT - Q3 2025</h3>
                     <p>Wilson & Associates is pleased to report strong financial performance for the third quarter of 2024. Our total revenue reached <span class="document-highlight" data-value="127.5">$127.5 million</span>, representing a significant increase from the previous quarter.</p>
                     
-                    <p>Operating expenses for the quarter totaled <span class="document-highlight" data-value="89.2">$89.2 million</span>, which includes a one-time infrastructure investment of <span class="document-highlight" data-value="15.7">$15.7 million</span>. Our gross profit margin improved to <span class="document-highlight" data-value="38.3">38.3%</span>, exceeding our projected target of 35%.</p>
+                    <p>Operating expenses for the quarter totaled <span class="document-highlight" data-value="58.5">$58.5 million</span>, which includes a one-time infrastructure investment of <span class="document-highlight" data-value="15.7">$15.7 million</span>. Our gross profit margin improved to <span class="document-highlight" data-value="38.3">38.3%</span>, exceeding our projected target of 35%.</p>
                     
-                    <p>The Technology division contributed <span class="document-highlight" data-value="45.8">$45.8 million</span> in revenue, while our Consulting services generated <span class="document-highlight" data-value="52.1">$52.1 million</span>. The remaining <span class="document-highlight" data-value="29.6">$29.6 million</span> came from our Strategic Advisory services.</p>
+                    <p>Revenue sources this quarter were led by our Consulting services, which generated <span class="document-highlight" data-value="143.8">$143.8 million</span>, followed by Technology at <span class="document-highlight" data-value="89.2">$89.2 million</span>.</p>
                     
                     <p>Employee headcount increased by <span class="document-highlight" data-value="247">247</span> professionals this quarter, bringing our total workforce to <span class="document-highlight" data-value="12459">12,459</span> employees globally. Research and development investments totaled <span class="document-highlight" data-value="18.3">$18.3 million</span>, representing <span class="document-highlight" data-value="14.4">14.4%</span> of our total revenue.</p>
                     
-                    <p>Looking ahead to Q4, we project revenue growth of approximately <span class="document-highlight" data-value="12.8">12.8%</span>, with total anticipated revenue of <span class="document-highlight" data-value="143.8">$143.8 million</span>. Our cash reserves stand at <span class="document-highlight" data-value="892.1">$892.1 million</span>, providing strong financial stability for future expansion initiatives.</p>
+                    <p>Looking ahead to Q4, we project revenue growth of approximately <span class="document-highlight" data-value="12.8">12.8%</span>, with total anticipated revenue of <span class="document-highlight" data-value="144.1">$144.1 million</span>. Our cash reserves stand at <span class="document-highlight" data-value="892.1">$892.1 million</span>, providing strong financial stability for future expansion initiatives.</p>
                 </div>
             </div>
         </section>
@@ -765,7 +1057,7 @@
             <div class="container">
                 <h2>Network Topology Analysis</h2>
                 <p style="text-align: center; margin-bottom: 3rem; color: #666; font-size: 1.1rem;">
-                    Trace the optimal network path by clicking nodes in the correct sequence
+                    Identify the correct redundancy path by selecting the nodes in operational sequence.
                 </p>
                 <div style="position: relative; height: 400px; background: #2c3e50; border-radius: 15px; margin: 2rem 0;">
                     <svg width="100%" height="100%" style="position: absolute; top: 0; left: 0;">
@@ -792,7 +1084,7 @@
                     <div class="network-node" data-node="H" style="position: absolute; top: 65%; left: 78%;">H</div>
                 </div>
                 <p style="text-align: center; color: #666; font-size: 0.9rem; margin-top: 1rem;">
-                    Hint: Find the path that spells out our company's core value
+                    Hint: Follow the chain of continuity — from initiation to fallback to containment.
                 </p>
             </div>
         </section>
@@ -820,20 +1112,20 @@
 
         <!-- Ultimate Success -->
         <div class="ultimate-success hidden" id="finalSuccess">
-            <h2 style="margin-bottom: 2rem;">🎯 NERD CORE MASTER ACHIEVED!</h2>
+            <h2 style="margin-bottom: 2rem;">🔓 SECRET CODE UNLOCKED!</h2>
             <p style="font-size: 1.3rem; margin-bottom: 2rem;">
-                You have successfully navigated the most complex corporate puzzle ever created.
-                Your analytical skills and attention to detail are truly exceptional.
+                Nice work. You’ve just deciphered a code that only a few can even glimpse.
+                Your precision and insight are on another level.
             </p>
             <div class="code-display">
-                UN7H1NK4BL3_N3RD_G0D_2024_ULT1M4T3
+                0101-4A3F-.-.- ... -...- QmFzZTY0
             </div>
             <p style="font-size: 1.1rem; opacity: 0.9;">
-                This code represents mastery of the "Unthinkable" difficulty level.<br>
-                You are among the elite few who can solve puzzles of this complexity.
+                This sequence marks your passage through the most cryptic challenge.<br>
+                Few understand its meaning — fewer still have earned it.
             </p>
             <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(255,255,255,0.1); border-radius: 10px;">
-                <h4>Challenge Statistics:</h4>
+                <h4>Challenge Summary:</h4>
                 <p>• 7 Complex Phases Completed</p>
                 <p>• 23 Hidden Clues Discovered</p>
                 <p>• 156 Unique Interactions Required</p>
@@ -845,10 +1137,13 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2024 Wilson & Associates Corporate Excellence Division. All rights reserved.</p>
-            <p style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.8;">
-                Serving Fortune 500 companies worldwide • ISO 9001:2015 Certified • SOC 2 Type II Compliant
+            <p>&copy; 2025 Wilson & Associates — Corporate Excellence Division. All rights reserved.</p>
+            <p style="font-size: 1rem; margin-top: 0.5rem; opacity: 0.8;">
+                Guided by a commitment to innovation — a principle we formally embraced in the early 1990s — we expanded operations across Asia, starting in a dynamic hub of global business. Since the mid-2000s, we’ve proudly recognized breakthrough thinking with our signature innovation award.
             </p>
+			<p style="font-size: 0.7rem; margin-top: 0.5rem; opacity: 0.8;">
+			    ISO 9001:2015 Certified • SOC 2 Type II Compliant
+			</p>
         </div>
     </footer>
 
